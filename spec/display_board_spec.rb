@@ -1,6 +1,6 @@
-require_relative"../lib/display_board.rb"
+require_relative"../lib/move.rb"
 
-describe "#display_board in 'lib/display_board.rb" do
+describe "#display_board in 'lib/move.rb" do
   context 'various game situations' do
     it 'prints a blank board when the board array is empty' do
       board = [" "," "," "," "," "," "," "," "," "]
