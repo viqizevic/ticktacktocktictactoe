@@ -40,3 +40,11 @@ def turn(board)
     turn(board)
   end
 end
+
+def play(board)
+  current_turn = 1
+  while current_turn <= 9
+    turn(board)
+    current_turn += 1
+  end
+end
