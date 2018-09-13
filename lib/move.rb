@@ -73,18 +73,11 @@ WIN_COMBINATIONS = [
 ]
 
 def won?(board)
-  WIN_COMBINATIONS.each do |win_combination|
-    win_index_1 = win_combination[0]
-    win_index_2 = win_combination[1]
-    win_index_3 = win_combination[2]
-    position_1 = board[win_index_1] # load the value of the board at win_index_1
-    position_2 = board[win_index_2] # load the value of the board at win_index_2
-    position_3 = board[win_index_3] # load the value of the board at win_index_3
-    if position_1 == position_2 && position_2 == position_3 && (position_1 == "X" || position_1 == "O")
-      return win_combination # return the win_combination indexes that won.
-    end
+  WIN_COMBINATIONS.detect do |combo|
+    board[combo[0]] == board[combo[1]] &&
+    board[combo[0]] == board[combo[2]] &&
+    position_taken?(board, combo[0])
   end
-  false
 end
 
 def full?(board)
@@ -100,6 +93,5 @@ def over?(board)
 end
 
 def winner(board)
-  win_combination = won?(board)
-  win_combination ? board[win_combination[0]] : nil
+  (win_combo = won?(board)) ? board[win_combo[0]] : nil
 end
