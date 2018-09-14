@@ -13,7 +13,7 @@ def input_to_index(input)
   input.to_i - 1
 end
 
-def move(board, index, player="X")
+def player_move(board, index, player)
   board[index] = player
 end
 
@@ -34,18 +34,10 @@ def turn(board)
   input = gets.strip
   index = input_to_index(input)
   if valid_move?(board, index)
-    move(board, index)
+    player_move(board, index, current_player(board))
     display_board(board)
   else
     turn(board)
-  end
-end
-
-def play(board)
-  current_turn = 1
-  while current_turn <= 9
-    turn(board)
-    current_turn += 1
   end
 end
 
@@ -94,4 +86,16 @@ end
 
 def winner(board)
   (win_combo = won?(board)) ? board[win_combo[0]] : nil
+end
+
+def play(board)
+  while !over?(board)
+    turn(board)
+  end
+
+  if gamer = winner(board)
+    puts "Congratulations #{gamer}!"
+  else
+    puts "Cat's Game!"
+  end
 end
